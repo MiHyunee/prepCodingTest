@@ -10,6 +10,6 @@ public class findMrKim {
         StringBuffer str = new StringBuffer("김서방은 ");
         str.append(i);
         str.append(" 에 있다");
-        return answer = new String(str.toString());
+        return str.toString();
     }
 }
