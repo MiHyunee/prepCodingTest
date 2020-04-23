@@ -1,8 +1,5 @@
 package lv1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class KakaoBlind2018Dart {
     public int dart(String dartResult) {
         String[] score = new String[3];
@@ -37,24 +34,16 @@ public class KakaoBlind2018Dart {
             }
         }
         for (int i = 0; i < 3; i++) {
-            System.out.println(option[i]);
-            if(option[i].equals(null))
-                scoreSum[i] = (int)Math.pow(Integer.parseInt(score[i]), Integer.parseInt(bonus[i]));
-            if (option[i].equals("*")) {
-                for (int j = 0; j <= i; j++) {
-                    if (i == j)
-                        scoreSum[j] = 2 * (int) Math.pow(Integer.parseInt(score[j]), Integer.parseInt(bonus[j]));
-                    else
-                        scoreSum[j] = scoreSum[j] * 2;
+            try {
+                if (option[i].equals("*")) {
+                    scoreSum[i] = 2 * (int) Math.pow(Integer.parseInt(score[i]), Integer.parseInt(bonus[i]));
+                    if(i != 0)
+                        scoreSum[i-1] = scoreSum[i-1] * 2;
+                } else if (option[i].equals("#")) {
+                    scoreSum[i] = (-1) * (int) Math.pow(Integer.parseInt(score[i]), Integer.parseInt(bonus[i]));
                 }
-            }
-            else if (option[i].equals("#")){
-                for (int j = 0; j <= i; j++) {
-                    if (i == j)
-                        scoreSum[j] = (-1) * (int) Math.pow(Integer.parseInt(score[j]), Integer.parseInt(bonus[j]));
-                    else
-                        scoreSum[j] *= -1;
-                }
+            }catch(NullPointerException e){
+                scoreSum[i] = (int) Math.pow(Integer.parseInt(score[i]), Integer.parseInt(bonus[i]));
             }
         }
         return scoreSum[0]+scoreSum[1]+scoreSum[2];
@@ -62,6 +51,6 @@ public class KakaoBlind2018Dart {
 
     public static void main(String[] args) {
         KakaoBlind2018Dart ex = new KakaoBlind2018Dart();
-        System.out.println(ex.dart("1S2D*3T"));
+        System.out.println(ex.dart("1D2S3T*"));
     }
 }
